@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Main page</title>
+</head>
+<body>
+    <div class="center">
+        <h1>Input values</h1>
+        <img style="border-radius: 8px; width: 320px; height:240px" src="{{ hist }}">
+        <img style="border-radius: 8px; width: 320px; height:240px" src="{{ hist1 }}">
+        <img src="data:image/png;base64,{{ data }}"/>
+        <form method="post" action="/" style="text-align: center;width: 100%;height: 1000px;">
+            <input class="textinput" type="number" placeholder="Average temperature" name="avg_temperature">
+            <input class="textinput" type="number" placeholder="Average humidity" name="avg_humidity">
+            <div style="text-align: center; height: 100%; margin-top: 3%;">
+                <input class="submit" type="submit" value="Send" name="send">
+            </div>
+        </form>
+    </div>
+
+    <style>
+        .center {
+            height: 1200px;
+            width: 100%;
+
+            background-color: #dbdcdd;
+            border-radius: 5px;
+            border: 1px solid #16181b;
+            
+            text-align: center;
+        }
+        .textinput {
+            text-align: center;
+
+            width: 25%;
+            height: 4%;
+            
+            font-size: 14px;
+            border-radius: 3px;
+            border: 1px solid #16181b;
+
+            font-family: "Roboto", sans-serif;
+        }
+        
+        .submit {
+            text-align: center;
+
+            width: 25%;
+            height: 4%;
+            
+            font-size: 14px;
+            border-radius: 20px;
+            border: 1px solid #16181b;
+
+            font-family: "Roboto", sans-serif;
+        }
+        h1 {
+            color: #16181b;
+            font-family: "Roboto", sans-serif;
+            text-align:center;
+        }
+    </style>
+</body>
+</html>

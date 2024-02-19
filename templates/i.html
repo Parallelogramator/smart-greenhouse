@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="10">
+<link href="http://a.radikal.ru/a02/2103/16/d2882b4d2489.jpg" rel="shortcut icon" type="image/x-icon">
+<title>Моя тепличка</title>
+<style>
+/* Фоновый градиент */
+#gradient {
+  background: linear-gradient(to bottom, #589afc, #f0f5fc);
+}
+
+/* Позиционирование картинки и наложение на нее данных */
+.wrapper{
+  min-height: 87vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  text-align: center;
+}
+
+.content{
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-block{
+  max-width: 900px;
+  position: relative;
+}
+
+.img-block img{
+  max-width: 100%;
+}
+
+.txt-top,
+.txt-bottom{
+  position: absolute;
+}
+
+.txt-top {
+  top: 20px;
+  left: 65px;
+}
+
+/* стиль кнопок «ON» и «OFF» */
+html {
+  font-family: Helvetica;
+  display: inline-block;
+  margin: 0px auto;
+  text-align: center;
+}
+
+.button {
+  background-color: #1d32f0;
+  border: none;
+  color: white;
+  padding: 3px 41px;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: #878686;
+}
+</style>
+</head>
+
+<body id="gradient" onload="startTime()">
+<center>
+<p>
+  <img alt="домик" height="70" width="72" src="https://a.d-cd.net/74AAAgMJYOA-1920.jpg">
+  <font size="7" color="#FFFFFF"> ;; Контрольная панель - Умная теплица</font>
+</p>
+</center>
+
+<div class="wrapper">
+  <div class="title">
+    <hr noshade size="3px">
+  </div>
+
+  <div class="content">
+    <div class="img-block">
+      <img src="https://a.d-cd.net/74AAAgMJYOA-1920.jpg" alt="картинка">
+      <div class="txt-top" style="top:17px; left:700px;">
+        <img src="http://a.radikal.ru/a23/2103/45/eebdf37707a9.gif" height="142" width="172">
+      </div>
+
+      <!-- Замените IN1, IN2, ... IN8 на реальные значения, которые вы хотите отобразить -->
+      <!-- При необходимости данные можно динамически обновлять с помощью JavaScript или серверной логики -->
+
+      <!-- Здесь будет код для отображения данных сенсоров и кнопок управления -->
+
+      <!-- Данные сенсоров -->
+      <div class="sensor-data">
+       <div class=txt-top style='top:20px; left:65px;'><img src=<a href="https://a.d-cd.net/74AAAgMJYOA-1920.jpg" rel="nofollow">https://a.d-cd.net/74AAAgMJYOA-1920.jpg</a>>
+Температура
+<b>{{temperature}}</b>
+ ;°C
+</div>
+
+<div class=txt-top style='top:50px; left:65px;'><img src=<a href="https://a.d-cd.net/74AAAgMJYOA-1920.jpg" rel="nofollow">https://a.d-cd.net/74AAAgMJYOA-1920.jpg</a>>
+Влажность
+<b>{{humidity}}</b>
+ %
+</div>
+
+<div class=txt-top style='top:260px; left:540px;'><img src=<a href="https://a.d-cd.net/74AAAgMJYOA-1920.jpg" rel="nofollow">https://a.d-cd.net/74AAAgMJYOA-1920.jpg</a>>
+ Влажность почвы
+<b>{{humidity_earth}}</b>
+ %
+</div>
+
+
+        <!-- Повторите блоки с классом .txt-top для других датчиков, подставив нужные значения -->
+      </div>
+
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>
+
