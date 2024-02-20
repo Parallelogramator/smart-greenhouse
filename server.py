@@ -130,14 +130,35 @@ def render_dash_app():
     return dash_app.index()
 
 
-@app.route('/update', methods=['POST'])
+@app.route('/update', methods=['POST', 'GET'])
 def update_values():
     new_temp = request.json.get('temperature')
     new_humidity = request.json.get('humidity')
 
     print(new_temp, new_humidity)
-
     return {'status': 'success'}, 200
+
+
+@app.route('/send_new_values', methods=['POST'])
+def send_new_values():
+    global average_temperatures, average_humidity, average_humidity_earth, dispersion_humidity, dispersion_temperatures, dispersion_humidity_earth
+    if request.form['avg_temperature']:
+        average_temperatures = request.form['avg_temperature']
+    if request.form['avg_humidity']:
+        average_humidity = request.form['avg_humidity']
+    if request.form['avg_humidity_earth']:
+        average_humidity_earth = request.form['avg_humidity_earth']
+    print(request.form)
+    return index()
+
+@app.route('/updater', methods=['POST', 'GET'])
+def update():
+    html_content = render_template(
+        'index.html'
+    )
+    response = make_response(html_content)
+
+    return response
 
 
 @app.route('/')
@@ -157,7 +178,7 @@ def control_pin(pin, state):
         print(f'GPIO {pin} is turned OFF')  # Simulate turning off the GPIO pin
     else:
         return 'Invalid state', 400
-    return 'OK', 200
+    return index(), 200
 
 
 # Маршрут для получения данных от NodeMCU

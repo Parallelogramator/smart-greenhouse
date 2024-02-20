@@ -34,7 +34,7 @@
         <div class="item" style="grid-column: 3; grid-row: 1;">
             <img style="padding-top: 15%; padding-left: auto; padding-right: auto;" src="https://cdn-icons-png.flaticon.com/512/11231/11231980.png" height="64px" width="64px">
             <h3 class="title">Влажность почвы</h3>
-            <h4><span id="humidity_earth"> %</h4>
+            <h4><span id="humidity_earth"></span> %</h4>
         </div>
 
         <div class="item" style="grid-column: 1; grid-row: 2;">
@@ -57,10 +57,14 @@
     </div>
 </div>
     <div class="center">
+        <a class="box"	href="/graph"
+					target="/">
+            <p style="text-decoration: none; font-family: Roboto">Показать график</p>
+        </a>
 
-        <a 	href="/graph"
+        <a style="background-color: black;" class="box"	href="/updater"
 					target="/" >
-        <p class="box"> Показать график</p>
+            <p style="text-decoration: none; font-family: Roboto">Изменить данные</p>
         </a>
     </div>
 
@@ -76,25 +80,41 @@
             font-size: 12px;
             margin-right: 5px;
         }
+
         .box {
             display: inline-block;
-            width: 160px;
-            height: 30px;
-            line-height: 30px;
             text-align: center;
             color: white;
             font-weight: bold;
-            font-size: 12px;
-            margin-right: 5px;
+            font-size: 16px;
             background-color: blue;
+            text-decoration: none;
+            font-family: Roboto;
+
+            padding-top: 0.5%;
+            padding-bottom: 0.5%;
+            padding-right: 1.5%;
+            padding-left: 1.5%;
         }
 
         .on {
-            background-color: green;
+            width: 200%;
+            background-color: #96BF8B;
+            border-radius: 3px;
+            color: white;
+            font-size: 14px;
+            font-family: Roboto;
+            text-align: center;
         }
 
         .off {
-            background-color: red;
+            width: 200%;
+            background-color: #BF616A;
+            border-radius: 3px;
+            color: white;
+            font-size: 14px;
+            font-family: Roboto;
+            text-align: center;
         }
         .main-content {
             background-color: #f1f1f1;
@@ -114,12 +134,11 @@
             display: inline-grid;
             place-self: center;
 
-
             justify-items: center;
             align-items: center;
 
             grid-template-columns: repeat(3, 1fr);
-            height: 100vh;
+            height: 50vh;
             grid-auto-rows: minmax(100px, auto);
         }
 
@@ -151,7 +170,7 @@
             font-weight: 500;
         }
 
-        h6 {
+        h3 {
             color: #B3BAC5;
             font-family: Roboto;
             text-align: center;
