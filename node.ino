@@ -17,8 +17,9 @@ const int TERM = D8;
 
 const char* ssid ="3153";       // SSID вашей Wi-Fi сети
 const char* password = "";  // Пароль от Wi-Fi сети
-const char* raspberry_ip = "192.168.0.13";  // IP-адрес Raspberry Pi
+const char* raspberry_ip = "192.168.0.10";  // IP-адрес Raspberry Pi
 const int raspberry_port = 5000;             // Порт Raspberry Pi
+int key = 0;
 
 WiFiClient client;
 DynamicJsonDocument doc(1024);
@@ -48,6 +49,27 @@ void setup() {
   pinMode (WATERLEVEL, INPUT);
 
   myServo.write(0); // Rotate servo back to 0 degrees
+
+  HTTPClient http;
+  String url = "http://" + String(raspberry_ip) + ":" + String(raspberry_port) + "/auth";
+  http.begin(client, url);
+  http.addHeader("Content-Type", "application/json");
+  String mac = WiFi.macAddress();
+  String postData = "{\"key\":" + String(key) + ",\"mac\":\"" + mac + "\"}";
+  int httpCode = http.POST(postData);
+  String response = "";
+
+    while (httpCode < 1) {
+      Serial.printf("[HTTP] Ошибка при получении ключа\n");
+        String postData = "{\"key\":" + String(key) + ",\"mac\":\"" + mac + "\"}";
+        int httpCode = http.POST(postData);
+    }
+    Serial.printf("[HTTP] POST успешно выполнен, код: %d\n", httpCode);
+
+    key = response.toInt();
+    Serial.println();
+    Serial.println(key);
+    http.end();
 }
 
 void loop() {
@@ -69,14 +91,14 @@ void loop() {
     }
     Serial.println(h);
     Serial.println(t);
-    
+
   int moisturePercentage = (100.00 - ( (analogRead(WATER_EARTH) / 1023.00) * 100.00 ) );
   Serial.print("Soil Moisture is  = ");
   Serial.print(moisturePercentage);
   Serial.println("%");
 
     // Формируем JSON-данные для отправки
-    String postData = "{\"key\":\"1\",\"humidity\":" + String(h) + ",\"temperature\":" + String(t) + ",\"humidity_earth\":" + String(moisturePercentage) + "}";
+    String postData = "{\"key\":" + String(key) + ",\"humidity\":" + String(h) + ",\"temperature\":" + String(t) + ",\"humidity_earth\":" + String(moisturePercentage) + "}";
     int httpCode = http.POST(postData);
     String response = "";
 
@@ -89,13 +111,9 @@ void loop() {
 
         Serial.printf("[HTTP] Ошибка при выполнении POST запроса\n");
     }
+    http.end();
 
     Serial.println("Отправка данных на Raspberry Pi...");
-    String url1 = "http://" + String(raspberry_ip) + ":" + String(raspberry_port) + "/get_data";
-    http.begin(client, url1);
-
- 
-    // в низу я так и не разобрался в чём проблема надо чекнуть через светодиод уровни
     
     DeserializationError error =  deserializeJson(doc, response);
 

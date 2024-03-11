@@ -1,67 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <title>Main page</title>
-</head>
-<body style="background-color: #f1f1f1">
-    <div class="center">
-        <h1>Введите значения</h1>
-        <form method="post" action="/send_new_values" style="width: 100%;height: 1000px;">
-            <input class="textinput" type="number" placeholder="Average temperature" name="avg_temperature">
-            <input class="textinput" type="number" placeholder="Average humidity" name="avg_humidity">
-            <input class="textinput" type="number" placeholder="Average humidity_earth" name="avg_humidity_earth">
-            <div style="text-align: center; height: 100%; margin-top: 3%;">
-                <input class="submit" type="submit" value="Отправить данные" name="send">
-            </div>
-        </form>
+<html>
+ <head>
+  <style>
+   body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+.grid-item {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f2f2f2;
+}
+
+@media only screen and (min-width: 600px) {
+  .col-m-6 {width: 50%;}
+}
+
+@media only screen and (min-width: 768px) {
+  .col-6 {width: 50%;}
+}
+
+.container {
+    width: 300px;
+    padding: 16px;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 100px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+input[type=text], input[type=date], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: green;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: darkgreen;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+  </style>
+ </head>
+ <body>
+  <h3>
+   Ввод данных для теплицы
+  </h3>
+  <div class="row">
+   <div class="col-6 col-m-6">
+    <div class="grid-item">
+     <label for="fname">
+      Поле 1
+     </label>
+     <input id="field1" name="field1" placeholder="Ваши данные.." type="text"/>
     </div>
-
-    <style>
-        .center {
-            height: 1200px;
-            width: 100%;
-            
-            text-align: center;
-        }
-        .textinput {
-            text-align: center;
-
-            width: 15%;
-            height: 4%;
-            
-            font-size: 14px;
-            border-radius: 3px;
-            border: 1px solid #16181b;
-
-            margin: auto;
-
-            font-family: "Roboto", sans-serif;
-        }
-        
-        .submit {
-            text-align: center;
-
-            width: 15%;
-            height: 4%;
-            
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #16181b;
-            background-color: #1C51E3;
-            color: white;
-
-            font-family: "Roboto", sans-serif;
-        }
-        h1 {
-            color: #16181b;
-            font-family: "Roboto", sans-serif;
-            text-align: center;
-        }
-    </style>
-</body>
+   </div>
+   <div class="col-6 col-m-6">
+    <div class="grid-item">
+     <label for="fname">
+      Поле 2
+     </label>
+     <input id="field2" name="field2" placeholder="Ваши данные.." type="text"/>
+    </div>
+   </div>
+   <div class="col-6 col-m-6">
+    <div class="grid-item">
+     <label for="fname">
+      Поле 3
+     </label>
+     <input id="field3" name="field3" placeholder="Ваши данные.." type="text"/>
+    </div>
+   </div>
+   <div class="col-6 col-m-6">
+    <div class="grid-item">
+     <label for="fname">
+      Поле 4
+     </label>
+     <input id="field4" name="field4" placeholder="Ваши данные.." type="text"/>
+    </div>
+   </div>
+   <div class="col-6 col-m-6">
+    <div class="grid-item">
+     <label for="fname">
+      Поле 5
+     </label>
+     <input id="field5" name="field5" placeholder="Ваши данные.." type="text"/>
+    </div>
+   </div>
+   <div class="col-6 col-m-6">
+    <div class="grid-item">
+     <label for="fname">
+      Поле 6
+     </label>
+     <input id="field6" name="field6" placeholder="Ваши данные.." type="text"/>
+    </div>
+   </div>
+  </div>
+  <div class="container">
+   <form action="/submit_data">
+    <input type="submit" value="Submit"/>
+   </form>
+  </div>
+ </body>
 </html>
