@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Management panel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid" style="background-color: white">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="background-color: #56baed; border: 1px solid white;">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  color: #0d0d0d;">Умная теплица</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/">Моя теплица</a></li>
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/management">Management panel</a></li>
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/graph">График</a></li>
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/updater">Панель управления</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label for="fname">
+                    Дисперсия температур
+                </label>
+                <input id="field2" name="field2" placeholder="Ваши данные.." type="text"/>
+            </div>
+        </div>
+
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Дисперсия asdgsagd
+                </label>
+                <input id="field3" name="field2" placeholder="Ваши данные.." type="text"/>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Что-то еще
+                </label>
+                <input id="field5" name="field2" placeholder="Ваши данные.." type="text"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+
+<style>
+
+    .navbarelement {
+        border: solid 1px white;
+        border-radius: 6px;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    body {
+      background-color: #56baed;
+      font-family: "Poppins", sans-serif;
+      height: 100vh;
+
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    [class*="col-"] {
+      float: left;
+      padding: 15px;
+    }
+
+    .grid-item {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-align: left;
+      padding: 15px;
+      margin-bottom: 10px;
+      background-color: #f2f2f2;
+
+
+      display: flex;
+      align-items: center;
+    }
+
+    @media only screen and (min-width: 600px) {
+      .col-m-6 {
+        width: 50%;
+      }
+    }
+
+    @media only screen and (min-width: 768px) {
+      .col-6 {
+        width: 50%;
+      }
+    }
+
+    .container {
+      -webkit-border-radius: 10px 10px 10px 10px;
+      border-radius: 10px 10px 10px 10px;
+      background: #fff;
+      margin-top: 7%;
+      padding: 30px;
+      width: 100%;
+      -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+      box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+
+    label {
+      padding: 12px 12px 12px 0;
+      display: inline-block;
+      text-align: center;
+      align: center;
+    }
+
+    input[type=button]:hover,
+    input[type=submit]:hover,
+    input[type=reset]:hover {
+      background-color: #39ace7;
+    }
+
+
+    input[type=text],
+    input[type=password] {
+      background-color: #f6f6f6;
+      border: none;
+      color: #0d0d0d;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 5px;
+      width: 85%;
+      border: 2px solid #f6f6f6;
+      -webkit-transition: all 0.5s ease-in-out;
+      -moz-transition: all 0.5s ease-in-out;
+      -ms-transition: all 0.5s ease-in-out;
+      -o-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      -webkit-border-radius: 5px 5px 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+    }
+
+
+    input[type=button],
+    input[type=submit],
+    input[type=reset] {
+      background-color: #56baed;
+      border: none;
+      color: white;
+      padding: 15px 80px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 13px;
+      -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+      box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+      -webkit-border-radius: 5px 5px 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+      margin: 5px 20px 40px 20px;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    input[type=text]:focus {
+      background-color: #fff;
+      border-bottom: 2px solid #5fbae9;
+    }
+
+    input[type=text]:placeholder {
+      color: #cccccc;
+    }
+
+
+    /* ANIMATIONS */
+
+    /* Simple CSS3 Fade-in-down Animation */
+    .fadeInDown {
+      -webkit-animation-name: fadeInDown;
+      animation-name: fadeInDown;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+      }
+
+      100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+      }
+
+      100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
+
+    /* Simple CSS3 Fade-in Animation */
+    @-webkit-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @-moz-keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .fadeIn {
+      opacity: 0;
+      -webkit-animation: fadeIn ease-in 1;
+      -moz-animation: fadeIn ease-in 1;
+      animation: fadeIn ease-in 1;
+
+      -webkit-animation-fill-mode: forwards;
+      -moz-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+
+      -webkit-animation-duration: 1s;
+      -moz-animation-duration: 1s;
+      animation-duration: 1s;
+    }
+
+    .fadeIn.first {
+      -webkit-animation-delay: 0.4s;
+      -moz-animation-delay: 0.4s;
+      animation-delay: 0.4s;
+    }
+
+    .fadeIn.second {
+      -webkit-animation-delay: 0.6s;
+      -moz-animation-delay: 0.6s;
+      animation-delay: 0.6s;
+    }
+
+    .fadeIn.third {
+      -webkit-animation-delay: 0.8s;
+      -moz-animation-delay: 0.8s;
+      animation-delay: 0.8s;
+    }
+
+    .fadeIn.fourth {
+      -webkit-animation-delay: 1s;
+      -moz-animation-delay: 1s;
+      animation-delay: 1s;
+    }
+
+    /* Simple CSS3 Fade-in Animation */
+    .underlineHover:after {
+      display: block;
+      left: 0;
+      bottom: -10px;
+      width: 0;
+      height: 2px;
+      background-color: #56baed;
+      content: "";
+      transition: width 0.2s;
+    }
+
+    .underlineHover:hover {
+      color: #0d0d0d;
+    }
+
+    .underlineHover:hover:after {
+      width: 100%;
+    }
+
+
+
+    /* OTHERS */
+
+    *:focus {
+      outline: none;
+    }
+
+    #icon {
+      width: 60%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+</style>
+
+
+</html>

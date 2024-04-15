@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body class="main-content">
+
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid" style="background-color: white">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="background-color: #56baed; border: 1px solid white;">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  color: #0d0d0d;">Умная теплица</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/">Моя теплица</a></li>
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/graph">График</a></li>
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/updater">Панель управления</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<img src="https://cdn-icons-png.flaticon.com/512/7486/7486803.png" style="display: block; margin-left: auto; margin-right: auto; width: 128px">
+
+<h1 class="title">404 Not found</h1>
+<div class="center">
+    <h5>Страница, которую вы ищите, не найдена</h5>
+</div>
+
+<style>
+    .status-box {
+        display: inline-block;
+        width: 80px;
+        height: 30px;
+        line-height: 20px;
+        text-align: center;
+        color: black;
+        font-weight: bold;
+        font-size: 12px;
+        margin-right: 5px;
+    }
+
+    .box {
+        display: inline-block;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        background-color: blue;
+        text-decoration: none;
+        font-family: Roboto;
+
+        padding-top: 0.5%;
+        padding-bottom: 0.5%;
+        padding-right: 1.5%;
+        padding-left: 1.5%;
+    }
+
+    .on {
+        width: 200%;
+        background-color: #96BF8B;
+        border-radius: 3px;
+        color: white;
+        font-size: 14px;
+        font-family: Roboto;
+        text-align: center;
+    }
+
+    .off {
+        width: 200%;
+        background-color: #BF616A;
+        border-radius: 3px;
+        color: white;
+        font-size: 14px;
+        font-family: Roboto;
+        text-align: center;
+    }
+    .main-content {
+        background-color: #f1f1f1;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+    }
+
+    .center {
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        display: flex;
+    }
+
+    .wrapper {
+        display: inline-grid;
+        place-self: center;
+
+        justify-items: center;
+        align-items: center;
+
+        grid-template-columns: repeat(3, 1fr);
+        height: 50vh;
+        grid-auto-rows: minmax(100px, auto);
+    }
+
+    .item {
+        border-radius: 8px;
+        text-align: center;
+
+        width: 40%;
+    }
+
+    .title {
+        color: #120813;
+        font-family: Roboto;
+        text-align: center;
+    }
+
+    .button
+    {
+        background-color: #1C51E3;
+        border: none;
+        color: white;
+        padding: 30px 64px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        width: 16%;
+        font-size: 10px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+    }
+
+    h5 {
+        color: #B3BAC5;
+        font-family: Roboto;
+        text-align: center;
+    }
+
+    ::selection {
+        background: #c8cce4;
+    }
+</style>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        function updateData() {
+            $.getJSON('/get_data', function(data) {
+                $('#temperature').text(data['temperature']);
+                $('#humidity').text(data['humidity']);
+                $('#humidity_earth').text(data['humidity_earth']);
+
+                // Обновляем статус для полива
+                updateStatus('water', data['water']);
+                // Обновляем статус для увлажнения
+                updateStatus('vibr_water', data['vibr_water']);
+                // Обновляем статус для проветривания
+                updateStatus('ventilation', data['ventilation']);
+            });
+        }
+
+        function updateStatus(id, value) {
+            var element = $('#' + id);
+            var on = value === 1;
+            element.removeClass('on off');
+            element.addClass(on ? 'on' : 'off');
+            element.html(on ? 'Включено' : 'Выключено');
+        }
+
+        // Вызываем функцию сразу же
+        updateData();
+        // Устанавливаем интервал для регулярного обновления данных
+        setInterval(updateData, 5000);
+    });
+</script>
+</script>
+</body>
+</html>

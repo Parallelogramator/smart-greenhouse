@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Table</title>
+    <style>
+        h1 {
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            display: flex;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #69e19f;
+        }
+    </style>
+</head>
+<body style="background-color: #ddf0fc;">
+        <h1>Последнее измерение</h1>
+    <!-- Форма обновления описания для конкретной записи -->
+    <table>
+        <tr>
+            <th>Номер теста</th>
+            <th>Сила разрыва</th>
+            <th>Длина растяжения</th>
+            <th>Время теста</th>
+            <th>Описание</th>
+            <th>Сохранить описание</th>
+        </tr>
+        {% for entry in data %}
+        <tr>
+            <td>{{ entry[0] }}</td>
+            <td>{{ entry[1] }}</td>
+            <td>{{ entry[2] }}</td>
+            <td>{{ entry[3] }}</td>
+            <td>
+                <!-- Поле ввода описания, где name атрибут формируется динамически -->
+                <form action="/update-description/{{ entry[0] }}" method="post">
+                    <input style="background-color: #fafdff; border: 2px solid #cccccc;" type="text" name="description" value="{{ entry[4] }}">
+                    <td>
+                        <!-- Кнопка сохранения изменения для этой конкретной записи -->
+                        <input type="submit" value="Save" style="background-color: #fafdff; border: 1px solid #cccccc;">
+                    </td>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

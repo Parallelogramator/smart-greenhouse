@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Table</title>
+    <style>
+        h1, form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #69e19f;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        input[type="submit"] {
+            margin-left: 20px;
+            background-color: #fafdff;
+            border: 1px solid #cccccc;
+        }
+    </style>
+</head>
+<body style="background-color: #ddf0fc;">
+    <h1>История измерений</h1>
+    <table>
+            <tr>
+                <th>Температура</th>
+                <th>Влажность</th>
+                <th>Влажность земли</th>
+                <th>Время теста</th>
+            </tr>
+            {% for entry in data %}
+            <tr>
+                <td>{{ entry[1] }}</td>
+                <td>{{ entry[2] }}</td>
+                <td>{{ entry[3] }}</td>
+                <td>
+                    <!-- добавляем скрытое поле для id каждой записи -->
+                    <input type="hidden" name="{{ 'id-' ~ loop.index }}" value="{{ entry[0] }}">
+                    <input style="background-color: #fafdff; border: 2px solid #cccccc;" type="text" name="{{ 'description-' ~ loop.index }}" value="{{ entry[5] }}">
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <!-- Одна кнопка сохранения для всех описаний -->
+    <form class="form-container" action="/update-descriptions" method="post">
+        <input type="submit" value="Save All Descriptions">
+    </form>
+</body>
+</html>

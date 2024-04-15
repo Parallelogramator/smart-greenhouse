@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + slider {
+  background-color: #2196F3;
+}
+
+input:focus + slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+slider.round {
+  border-radius: 34px;
+}
+
+slider.round:before {
+  border-radius: 50%;
+}
+        body {
+          background-color: #56baed;
+          font-family: "Poppins", sans-serif;
+          height: 100vh;
+
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+
+        .row::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+
+        [class*="col-"] {
+          float: left;
+          padding: 15px;
+        }
+
+        .grid-item {
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          text-align: left;
+          padding: 15px;
+          margin-bottom: 10px;
+          background-color: #f2f2f2;
+
+
+          display: flex;
+          align-items: center;
+        }
+
+        .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+        @media only screen and (min-width: 600px) {
+          .col-m-6 {
+            width: 50%;
+          }
+        }
+
+        @media only screen and (min-width: 768px) {
+          .col-6 {
+            width: 50%;
+          }
+        }
+
+        .container {
+          -webkit-border-radius: 10px 10px 10px 10px;
+          border-radius: 10px 10px 10px 10px;
+          background: #fff;
+          margin-top: 7%;
+          padding: 30px;
+          width: 100%;
+          -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+          box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+          text-align: center;
+        }
+
+
+        label {
+          padding: 12px 12px 12px 0;
+          display: inline-block;
+          text-align: center;
+          align: center;
+        }
+
+        input[type=button]:hover,
+        input[type=submit]:hover,
+        input[type=reset]:hover {
+          background-color: #39ace7;
+        }
+
+
+        input[type=number],
+        input[type=password] {
+          background-color: #f6f6f6;
+          border: none;
+          color: #0d0d0d;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 5px;
+          width: 85%;
+          border: 2px solid #f6f6f6;
+          -webkit-transition: all 0.5s ease-in-out;
+          -moz-transition: all 0.5s ease-in-out;
+          -ms-transition: all 0.5s ease-in-out;
+          -o-transition: all 0.5s ease-in-out;
+          transition: all 0.5s ease-in-out;
+          -webkit-border-radius: 5px 5px 5px 5px;
+          border-radius: 5px 5px 5px 5px;
+        }
+
+
+        input[type=button],
+        input[type=submit],
+        input[type=reset] {
+          background-color: #56baed;
+          border: none;
+          color: white;
+          padding: 15px 80px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          text-transform: uppercase;
+          font-size: 13px;
+          -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+          box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
+          -webkit-border-radius: 5px 5px 5px 5px;
+          border-radius: 5px 5px 5px 5px;
+          margin: 5px 20px 40px 20px;
+          -webkit-transition: all 0.3s ease-in-out;
+          -moz-transition: all 0.3s ease-in-out;
+          -ms-transition: all 0.3s ease-in-out;
+          -o-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+        }
+
+        input[type=number]:focus {
+          background-color: #fff;
+          border-bottom: 2px solid #5fbae9;
+        }
+
+        input[type=number]:placeholder {
+          color: #cccccc;
+        }
+
+
+        /* ANIMATIONS */
+
+        /* Simple CSS3 Fade-in-down Animation */
+        .fadeInDown {
+          -webkit-animation-name: fadeInDown;
+          animation-name: fadeInDown;
+          -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+        }
+
+        @-webkit-keyframes fadeInDown {
+          0% {
+            opacity: 0;
+            -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+          }
+
+          100% {
+            opacity: 1;
+            -webkit-transform: none;
+            transform: none;
+          }
+        }
+
+        @keyframes fadeInDown {
+          0% {
+            opacity: 0;
+            -webkit-transform: translate3d(0, -100%, 0);
+            transform: translate3d(0, -100%, 0);
+          }
+
+          100% {
+            opacity: 1;
+            -webkit-transform: none;
+            transform: none;
+          }
+        }
+
+        /* Simple CSS3 Fade-in Animation */
+        @-webkit-keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+
+        @-moz-keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+
+          to {
+            opacity: 1;
+          }
+        }
+
+        .fadeIn {
+          opacity: 0;
+          -webkit-animation: fadeIn ease-in 1;
+          -moz-animation: fadeIn ease-in 1;
+          animation: fadeIn ease-in 1;
+
+          -webkit-animation-fill-mode: forwards;
+          -moz-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+
+          -webkit-animation-duration: 1s;
+          -moz-animation-duration: 1s;
+          animation-duration: 1s;
+        }
+
+        .fadeIn.first {
+          -webkit-animation-delay: 0.4s;
+          -moz-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+        }
+
+        .fadeIn.second {
+          -webkit-animation-delay: 0.6s;
+          -moz-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+        }
+
+        .fadeIn.third {
+          -webkit-animation-delay: 0.8s;
+          -moz-animation-delay: 0.8s;
+          animation-delay: 0.8s;
+        }
+
+        .fadeIn.fourth {
+          -webkit-animation-delay: 1s;
+          -moz-animation-delay: 1s;
+          animation-delay: 1s;
+        }
+
+        /* Simple CSS3 Fade-in Animation */
+        .underlineHover:after {
+          display: block;
+          left: 0;
+          bottom: -10px;
+          width: 0;
+          height: 2px;
+          background-color: #56baed;
+          content: "";
+          transition: width 0.2s;
+        }
+
+        .underlineHover:hover {
+          color: #0d0d0d;
+        }
+
+        .underlineHover:hover:after {
+          width: 100%;
+        }
+
+
+
+        /* OTHERS */
+
+        *:focus {
+          outline: none;
+        }
+
+        #icon {
+          width: 60%;
+        }
+
+        * {
+          box-sizing: border-box;
+        }
+    </style>
+<script>
+$(document).ready(function(){
+  // 1. Предзаполните поля ввода данными Flask (уже сделано)
+  // ...
+
+  // 2. Обработать выбор NodeMCU с использованием выпадающего списка
+  $("#dropdownMenu").change(function(){
+    var selectedNode = $(this).val(); // Получить выбранное значение
+    // Используйте selectedNode для дальнейшей логики или отображения
+    // ...
+    console.log("Выбранный NodeMCU:", selectedNode);
+  });
+
+
+  // 3. Получить значения переключателей и вводимые значения при отправке формы
+  $("form").submit(function(event){
+    event.preventDefault(); // Предотвратить стандартную отправку формы
+
+    var formData = {
+      selectedNode: $("#dropdownMenu").val(), // Получить выбранный NodeMCU
+        on_TEMPERATURE: $("#on_TEMPERATURE").is(":checked"),
+  on_HUMIDITY: $("#on_HUMIDITY").is(":checked"),
+  on_WATER_EARTH: $("#on_WATER_EARTH").is(":checked"),
+  on_FOTORES: $("#on_FOTORES").is(":checked"),
+  on_WATERLEVEL: $("#on_WATERLEVEL").is(":checked"),
+  on_VENTILATION: $("#on_VENTILATION").is(":checked"),
+  on_WATER: $("#on_WATER").is(":checked"),
+  on_LIGHT: $("#on_LIGHT").is(":checked"),
+  on_TERM: $("#on_TERM").is(":checked"),
+  on_VIBR: $("#on_VIBR").is(":checked"),
+      average_temperatures: $("#average_temperatures").val(),
+      dispersion_temperatures: $("#dispersion_temperatures").val(),
+      average_humidity_earth: $("#average_humidity_earth").val(),
+      dispersion_humidity_earth: $("#dispersion_humidity_earth").val(),
+      average_humidity: $("#average_humidity").val(),
+      dispersion_humidity: $("#dispersion_humidity").val(),
+    };
+
+    // 4. Отправить данные в FormData с использованием POST запроса
+    $.ajax({
+      type: "POST",
+      url: "/submit_data",
+      data: formData,
+      success: function(response){
+        // Обработать успешный ответ
+        alert("Данные успешно отправлены!");
+      },
+      error: function(error){
+        // Обработать ошибку
+        console.error("Ошибка: ", error);
+        alert("Ошибка при отправке данных!");
+      }
+    });
+  });
+});
+</script>
+    <script>
+        $(document).ready(function() {
+            $('#dropdownMenu').change(function() {
+                var selectedValue = $(this).val(); // Получаем выбранное значение
+
+                // Отправляем AJAX запрос
+                $.ajax({
+                    type: 'POST',
+                    url: '/example', // Это ваш серверный endpoint
+                    data: JSON.stringify({ selectedOption: selectedValue }),
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function(response) {
+                        // В случае успеха обновляем значения input
+                        // Ожидается, что сервер вернет словарь в формате { 'id_поля': 'новое_значение' }
+                        for (var id in response) {
+                            $('#' + id).val(response[id]);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Произошла ошибка: ", status, error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid" style="background-color: white">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+                    style="background-color: #56baed; border: 1px solid white;">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display:inline-block;
+  color: #0d0d0d;">Умная теплица</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/">Home</a></li>
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/graph">Show
+                    graphics</a></li>
+                <li class="active"><a style="
+        border: solid 1px white;
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/updater">Change
+                    data</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="display: inline;">
+    <h3 style="text-align: center; color: white;">
+        Ввод данных для теплицы
+    </h3>
+</div>
+
+<div class="row">
+
+    <form action="/submit_data" method="post">
+        <div class="col-sm-4" style="width: 100%">
+            <div class="grid-item">
+                <label>
+                    NodeMCU toggle
+                </label>
+
+                <div class="center">
+            <select id="dropdownMenu" class="dropdown">
+                {% for id in data %}
+             <option value={{id}}>{{ id }}</option>
+                {% endfor %}
+
+    </select>
+
+            </div>
+        </div>
+
+                <div class="col-sm-4" style="width: 100%">
+            <div class="grid-item">
+                 <label>
+                    Температура
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_TEMPERATURE">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    on_HUMIDITY
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_HUMIDITY">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    on_WATER_EARTH
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_WATER_EARTH">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                   Считывание освещенности
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_FOTORES">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    Уровень воды
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_WATERLEVEL">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    Вентеляция
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_VENTILATION">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    Полив
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_WATER">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    Разрешение на включение света
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_LIGHT">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    Подогрев
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_TERM">
+                      <span class="slider round"></span>
+                    </label>
+ <label>
+                    on_VIBR
+                </label>
+                <label class="switch">
+                      <input type="checkbox" id="on_VIBR">
+                      <span class="slider round"></span>
+                    </label>
+
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Средняя температура
+                </label>
+                <input id="average_temperatures" name="average_temperatures" value="{{ average_temperatures }}" type="number"/>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Средняя влажность земли
+                </label>
+                <input id="average_humidity_earth" name="average_humidity_earth" placeholder={{ entry }} type="number"/>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Средняя влажность
+                </label>
+                <input id="average_humidity" name="average_humidity" placeholder="Ваши данные.." type="number"/>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Допустимая погрешность температуры в градусах
+                </label>
+                <input id="dispersion_temperatures" name="dispersion_temperatures" placeholder="Ваши данные.." type="number"/>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Допустимая погрешность влажности земли
+                </label>
+                <input id="dispersion_humidity_earth" name="dispersion_humidity_earth" placeholder="Ваши данные.." type="number"/>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="grid-item">
+                <label>
+                    Допустимая погрешность влажности
+                </label>
+                <input id="dispersion_humidity" name="dispersion_humidity" placeholder="Ваши данные.." type="number"/>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <input type="submit" value="Отправить данные" name="send"/>
+        </div>
+
+    </form>
+
+<label for="textInput">Ваш выбор:</label>
+    <input type="text" id="textInput">
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="background-color: #ddf0fc;">
+<form action="/start1" method="post">
+  <div>
+    <label for="diameter">Введите диаметр волокна:</label>
+    <input type="number" id="diameter" name="diameter" required><br>
+  </div>
+  <div>
+    <label for="coefficient">Введите коэффициент Юнга:</label>
+    <input type="number" id="coefficient" name="coefficient" required><br>
+  </div>
+  <div>
+    <label for="length">Введите длину нити:</label>
+    <input type="number" id="length" name="length" value="{{ length }}" required>
+  </div>
+  <button type="submit">Подтвердить</button>
+</form>
+
+    <script type="text/javascript">
+$(document).ready(function() {
+    function updateData() {
+        $.getJSON('/get_data', function(data) {
+            $('#temperature').text(data['strength']);
+            $('#humidity').text(data['strength']);
+            $('#humidity_earth').text(data['strength']);
+
+            // Обновляем статус для полива
+            updateStatus('water', data['water']);
+            // Обновляем статус для увлажнения
+            updateStatus('vibr_water', data['vibr_water']);
+            // Обновляем статус для проветривания
+            updateStatus('ventilation', data['ventilation']);
+        });
+    }
+
+    function updateStatus(id, value) {
+        var element = $('#' + id);
+        var on = value === 1;
+        element.removeClass('on off');
+        element.addClass(on ? 'on' : 'off');
+        element.html(on ? 'Включено' : 'Выключено');
+    }
+
+    // Вызываем функцию сразу же
+    updateData();
+    // Устанавливаем интервал для регулярного обновления данных
+    setInterval(updateData, 5000);
+});
+    </script>
+</body>
+</html>

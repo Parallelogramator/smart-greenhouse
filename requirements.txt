@@ -1,0 +1,5 @@
+requests
+dash
+flask
+plotly
+pandas
