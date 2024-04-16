@@ -7,7 +7,7 @@ import plotly.graph_objs as go
 from dash.dependencies import Output, Input
 from flask import Flask, request, render_template, make_response, redirect, url_for
 
-from sqlalchemy import create_engine, Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, String, Integer, DateTime, ForeignKey, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
@@ -67,6 +67,7 @@ Base.metadata.create_all(engine)
 
 # Определяем функции для взаимодействия с базой данных
 def read_db(id=None):
+    print(id)
     if id is not None:
         return session.query(Grafics).filter(Grafics.id == id).all()
     else:
@@ -78,8 +79,16 @@ def read_id():
 
 
 def update_db(key, temperature, humidity, humidity_earth, light):
-    new_record = Grafics(id=key, temperature=temperature, humidity=humidity, humidity_earth=humidity_earth,
-                         time=datetime.now())
+    max_number = session.query(func.max(Grafics.number)).scalar()
+    if max_number is None:
+        next_number = 1  # Если записей ещё нет, начинаем с 1
+    else:
+        next_number = int(max_number) + 1
+
+    # Создаём новую запись с автоматически увеличенным на 1 номером
+    new_record = Grafics(number=next_number, id=key, temperature=temperature, humidity=humidity,
+                         humidity_earth=humidity_earth, time=datetime.now())
+
     session.add(new_record)
     try:
         session.commit()
@@ -89,6 +98,8 @@ def update_db(key, temperature, humidity, humidity_earth, light):
 
 
 def controll(key, temperature, humidity, humidity_earth, light):
+    print(key)
+    print(value_contr[key])
     # Например, если температура выше 30 градусов, включаем реле1
     if humidity and humidity > value_contr[key]['average_humidity'] + value_contr[key]['dispersion_humidity']:
         contr[key]['ventilation'] = 1
@@ -117,7 +128,40 @@ def controll(key, temperature, humidity, humidity_earth, light):
         contr[key]['light'] = 1
     else:
         contr[key]['light'] = 0
+    print(contr[key])
 
+
+def save_permissions(permissions_dict, key_id):
+    """
+    Сохраняет разрешения из словаря в таблицу 'permissions' в базе данных, используя заданный ключевой ID.
+
+    Аргументы:
+        permissions_dict (dict): Словарь, содержащий данные о разрешениях.
+                              Ключи должны соответствовать именам колонок в таблице 'permissions'.
+                              Лишние ключи будут игнорироваться.
+        key_id (int): ID ключа, связанного с разрешениями.
+
+    Возвращает:
+        None
+    """
+
+    # Отфильтровываем словарь, чтобы оставить только допустимые имена колонок
+    valid_columns = [c.name for c in Permissions.__table__.columns if c.name != 'id']
+    filtered_permissions = {k: (1 if v == 'true' else 0) for k, v in permissions_dict.items() if k in valid_columns}
+
+    # Создаем или обновляем запись разрешений
+    permission_entry = session.query(Permissions).filter_by(id=key_id).first()
+    if permission_entry:
+        # Обновляем существующие разрешения
+        for key, value in filtered_permissions.items():
+            setattr(permission_entry, key, value)
+    else:
+        # Создаем новую запись разрешений
+        permission_entry = Permissions(id=key_id, **filtered_permissions)
+        session.add(permission_entry)
+
+    # Фиксируем изменения в базе данных
+    session.commit()
 
 def get_weather():
     response = requests.get(
@@ -137,8 +181,58 @@ def get_weather():
 
 
 app = Flask(__name__)
-dash_app = dash.Dash(__name__, server=app, routes_pathname_prefix='/graf/')
+dash_app = dash.Dash(__name__, server=app, routes_pathname_prefix='/graf/', external_stylesheets=[
+    'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'
+])
 
+nav_menu = html.Nav(className="navbar navbar-inverse", children=[
+    html.Div(className="container-fluid", style={"backgroundColor": "white"}, children=[
+        html.Div(className="navbar-header", children=[
+            html.Button(type="button", className="navbar-toggle", **{
+                'data-toggle': "collapse",
+                'data-target': "#myNavbar",
+                'style': {"backgroundColor": "#56baed", "border": "1px solid white"}
+            }, children=[
+                html.Span(className="icon-bar"),
+                html.Span(className="icon-bar"),
+                html.Span(className="icon-bar"),
+            ]),
+            html.A(className="navbar-brand", href="#", children="Умная теплица", style={
+                "textAlign": "center",
+                "fontSize": "16px",
+                "fontWeight": "600",
+                "textTransform": "uppercase",
+                "display": "inline-block",
+                "color": "#0d0d0d"
+            })
+        ]),
+        html.Div(className="collapse navbar-collapse", id="myNavbar", children=[
+            html.Ul(className="nav navbar-nav", children=[
+                html.Li(className="active", children=html.A(href="/", children="Моя теплица", style={
+                    "border": "solid 1px white",
+                    "borderRadius": "2px",
+                    "backgroundColor": "#edeff3",
+                    "color": "black",
+                    "fontFamily": "Roboto"
+                })),
+                html.Li(className="active", children=html.A(href="/graph", children="График", style={
+                    "border": "solid 1px white",
+                    "borderRadius": "2px",
+                    "backgroundColor": "#edeff3",
+                    "color": "black",
+                    "fontFamily": "Roboto"
+                })),
+                html.Li(className="active", children=html.A(href="/updater", children="Панель управления", style={
+                    "border": "solid 1px white",
+                    "borderRadius": "2px",
+                    "backgroundColor": "#edeff3",
+                    "color": "black",
+                    "fontFamily": "Roboto"
+                }))
+            ])
+        ])
+    ])
+])
 
 # Функция для преобразования данных из базы данных в Pandas DataFrame
 
@@ -207,6 +301,7 @@ def convert_to_datetime(date_str):
 base_layout = [{'label': 'Все', 'value': 0}]
 # Добавление компонентов выбора временного диапазона и частоты
 dash_app.layout = html.Div(children=[
+    nav_menu,
     dcc.Graph(id='live-update-graph'),
     dcc.Interval(
         id='interval-component',
@@ -408,6 +503,7 @@ def auth():
                                     'dispersion_humidity_earth': 5,
                                     'average_humidity': 20,
                                     'dispersion_humidity': 5}
+        print(response)
         return str(response)
     return str('')
 
@@ -494,6 +590,7 @@ def submit():
     for tup in dict(request.form).items():
         values[tup[0]] = tup[1]
     print(values)
+    save_permissions(values, int(values['selectedNode']))
     for i in value_contr[int(values['selectedNode'])]:
         if i in values:
             value_contr[int(values['selectedNode'])][i] = int(values[i])
@@ -538,9 +635,6 @@ def control_pin(pin, state):
 # Маршрут для получения данных от NodeMCU
 @app.route('/update_data', methods=['POST'])
 def update_data():
-    if request.remote_addr not in authorized_users:
-        return redirect('/login?r=update_data')
-
     global contr
     data = request.get_json()
 
@@ -570,7 +664,6 @@ def update_data():
     controll(key, temperature, humidity, humidity_earth, light)
     update_db(key, temperature, humidity, humidity_earth, light)
 
-    # эта хрень просто ответ. можно прочесть на ардуине
     return str(contr[key])
 
 
@@ -583,7 +676,7 @@ def get_data():
         return redirect('/login?r=index')
 
     # Получить последние данные из базы данных
-    ser = read_db(id)
+    ser = read_db(int(id))
     print(ser)
     ser = ser[-2]
 

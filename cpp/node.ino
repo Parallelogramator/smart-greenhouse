@@ -28,9 +28,9 @@ int on_LIGHT = 0;
 int on_TERM = 0;
 int on_VIBR = 0;
 
-const char* ssid = "-1";              // SSID вашей Wi-Fi сети
-const char* password = "";        // Пароль от Wi-Fi сети
-const char* raspberry_ip = "172.19.104.116";  // IP-адрес Raspberry Pi
+const char* ssid = "1811wifi-1";              // SSID вашей Wi-Fi сети
+const char* password = "1811pass1811";        // Пароль от Wi-Fi сети
+const char* raspberry_ip = "172.19.104.151";  // IP-адрес Raspberry Pi
 const int raspberry_port = 5000;              // Порт Raspberry Pi
 int key = 0;
 unsigned long lastTime = 0;  // сохраните это значение в начале программы
@@ -57,6 +57,7 @@ void setup() {
 
   myServo.write(0);  // Rotate servo back to 0 degrees
   wifi_start();
+  Serial.println(1);
 }
 
 void loop() {
@@ -187,7 +188,7 @@ void wifi_start() {
   Serial.println(on_FOTORES);
   Serial.println(on_WATERLEVEL);
   Serial.println(on_VENTILATION);
-  Serial.println(on_WATER);
+  Serial.println("this :" +on_WATER);
   Serial.println(on_LIGHT);
   Serial.println(on_TERM);
   Serial.println(on_VIBR);

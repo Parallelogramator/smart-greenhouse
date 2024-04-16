@@ -14,6 +14,23 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+
+    .dropdown {
+        border: 1px solid white;
+        border-radius: 12px;
+        min-height: 25px;
+        min-width: 50px;
+        color: grey;
+        text-align: center;
+    }
+
+
+
+
+
+
+
+
         switch {
   position: relative;
   display: inline-block;
@@ -104,18 +121,17 @@ slider.round:before {
           padding: 15px;
           margin-bottom: 10px;
           background-color: #f2f2f2;
-
-
           display: flex;
           align-items: center;
         }
 
         .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+          position: relative;
+          display: inline-block;
+          width: 50px;
+          height: 15px;
+          margin-left: 5px;
+        }
 
 /* Hide default HTML checkbox */
 .switch input {
@@ -140,8 +156,8 @@ slider.round:before {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 15px;
+  width: 15px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -158,9 +174,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 /* Rounded sliders */
@@ -188,7 +204,7 @@ input:checked + .slider:before {
           -webkit-border-radius: 10px 10px 10px 10px;
           border-radius: 10px 10px 10px 10px;
           background: #fff;
-          margin-top: 7%;
+          margin: auto;
           padding: 30px;
           width: 100%;
           -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
@@ -198,7 +214,7 @@ input:checked + .slider:before {
 
 
         label {
-          padding: 12px 12px 12px 0;
+          padding: 12px 0 12px 0;
           display: inline-block;
           text-align: center;
           align: center;
@@ -417,6 +433,7 @@ input:checked + .slider:before {
         vertical-align: middle;
         display: flex;
     }
+
     </style>
     <script>
         $(document).ready(function(){
@@ -471,6 +488,7 @@ input:checked + .slider:before {
             });
           });
         });
+
     </script>
     <script>
         $(document).ready(function() {
@@ -497,6 +515,7 @@ input:checked + .slider:before {
                 });
             });
         });
+
     </script>
 </head>
 
@@ -528,7 +547,8 @@ input:checked + .slider:before {
         border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/graph">График</a></li>
                 <li class="active"><a style="
         border: solid 1px white;
-        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/updater">Панель управления</a></li>
+        border-radius: 2px; background-color: #edeff3; color: black; font-family: Roboto" href="/updater">Панель
+                    управления</a></li>
             </ul>
         </div>
     </div>
@@ -553,7 +573,7 @@ input:checked + .slider:before {
                 <div>
                     <select id="dropdownMenu" class="dropdown">
                         {% for id in data %}
-                        <option value={{id}}>{{ id }}</option>
+                        <option value={{id}} class="dropdown-option">{{ id }}</option>
                         {% endfor %}
 
                     </select>
@@ -562,81 +582,108 @@ input:checked + .slider:before {
             <div>
                 <h4 style="text-align: center; color: white;">Разрешение на обработку</h4>
             </div>
-             <div class="col-sm-4" style="width: 100%">
-            <div class="grid-item">
-                 <label>
-                    Температуры
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_TEMPERATURE">
-                      <span class="slider round"></span>
+
+            <div class="col-sm-4" style="width: 100%">
+                <div class="grid-item" style="
+   display: flex;
+   align-items: center;
+   justify-content: center;">
+
+                    <label style="margin-left: 20px;">
+                        Влажности
                     </label>
- <label>
-                    Влажности
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_HUMIDITY">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                    Влажности почвы
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_WATER_EARTH">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                   Освещенности
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_FOTORES">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                    Уровня воды
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_WATERLEVEL">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                    Вентеляции
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_VENTILATION">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                    Полива
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_WATER">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                    Дополнительного освящения
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_LIGHT">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                    Подогрева
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_TERM">
-                      <span class="slider round"></span>
-                    </label>
- <label>
-                    увлажнения воздуха
-                </label>
-                <label class="switch">
-                      <input type="checkbox" id="on_VIBR">
-                      <span class="slider round"></span>
+                    <label class="switch">
+                        <input type="checkbox" id="on_HUMIDITY">
+                        <span class="slider round"></span>
                     </label>
 
+                    <label style="margin-left: 20px;">
+                        Влажности почвы
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_WATER_EARTH">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="grid-item" style="
+   display: flex;
+   align-items: center;
+   justify-content: center;">
+                    <label style="margin-left: 20px;">
+                        Освещенности
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_FOTORES">
+                        <span class="slider round"></span>
+                    </label>
+                    <label style="margin-left: 20px;">
+                        Уровня воды
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_WATERLEVEL">
+                        <span class="slider round"></span>
+                    </label>
+                    </div>
+                <div class="grid-item" style="
+   display: flex;
+   align-items: center;
+   justify-content: center;">
+                    <label style="margin-left: 20px;">
+                        Вентеляции
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_VENTILATION">
+                        <span class="slider round"></span>
+                    </label>
+                    <label style="margin-left: 20px;">
+                        Полива
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_WATER">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="grid-item" style="
+   display: flex;
+   align-items: center;
+   justify-content: center;">
+                    <label style="margin-left: 20px;">
+                        Дополнительного освящения
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_LIGHT">
+                        <span class="slider round"></span>
+                    </label>
+                    <label style="margin-left: 20px;">
+                        Подогрева
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_TERM">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="grid-item" style="
+   display: flex;
+   align-items: center;
+   justify-content: center;">
+                    <label style="margin-left: 20px;">
+                        Увлажнения воздуха
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_VIBR">
+                        <span class="slider round"></span>
+                    </label>
+
+                    <label style="margin-left: 20px;">
+                        Температуры
+                    </label>
+                    <label class="switch">
+                        <input type="checkbox" id="on_TEMPERATURE">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
-        </div>
 
             <div class="col-sm-4">
                 <div class="grid-item">
@@ -653,7 +700,8 @@ input:checked + .slider:before {
                     <label>
                         Средняя влажность земли
                     </label>
-                    <input id="average_humidity_earth" name="average_humidity_earth" value="{{ skr.average_humidity_earth }}"
+                    <input id="average_humidity_earth" name="average_humidity_earth"
+                           value="{{ skr.average_humidity_earth }}"
                            type="number"/>
                 </div>
             </div>
@@ -663,7 +711,8 @@ input:checked + .slider:before {
                     <label>
                         Средняя влажность
                     </label>
-                    <input id="average_humidity" name="average_humidity" value="{{ skr.average_humidity }}" type="number"/>
+                    <input id="average_humidity" name="average_humidity" value="{{ skr.average_humidity }}"
+                           type="number"/>
                 </div>
             </div>
 
@@ -672,7 +721,8 @@ input:checked + .slider:before {
                     <label>
                         Допустимая погрешность температуры в градусах
                     </label>
-                    <input id="dispersion_temperatures" name="dispersion_temperatures" value="{{ skr.dispersion_temperatures }}"
+                    <input id="dispersion_temperatures" name="dispersion_temperatures"
+                           value="{{ skr.dispersion_temperatures }}"
                            type="number"/>
                 </div>
             </div>
@@ -682,7 +732,8 @@ input:checked + .slider:before {
                     <label>
                         Допустимая погрешность влажности земли
                     </label>
-                    <input id="dispersion_humidity_earth" name="dispersion_humidity_earth" value="{{ skr.dispersion_humidity_earth }}"
+                    <input id="dispersion_humidity_earth" name="dispersion_humidity_earth"
+                           value="{{ skr.dispersion_humidity_earth }}"
                            type="number"/>
                 </div>
             </div>
@@ -698,7 +749,7 @@ input:checked + .slider:before {
             </div>
 
 
-            <div class="container">
+            <div class="container" style="margin-top: -10px">
                 <input type="submit" value="Отправить данные" name="send"/>
             </div>
 
