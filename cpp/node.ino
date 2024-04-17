@@ -28,8 +28,8 @@ int on_LIGHT = 0;
 int on_TERM = 0;
 int on_VIBR = 0;
 
-const char* ssid = "1811wifi-1";              // SSID вашей Wi-Fi сети
-const char* password = "1811pass1811";        // Пароль от Wi-Fi сети
+const char* ssid = "-1";              // SSID вашей Wi-Fi сети
+const char* password = "";        // Пароль от Wi-Fi сети
 const char* raspberry_ip = "172.19.104.151";  // IP-адрес Raspberry Pi
 const int raspberry_port = 5000;              // Порт Raspberry Pi
 int key = 0;

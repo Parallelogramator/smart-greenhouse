@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96ae0d72-2b6f-40d8-a687-17fc87e46188" name="Changes" comment="Login system">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/datachanger.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/datachanger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web.db" beforeDir="false" afterPath="$PROJECT_DIR$/web.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cpp/node.ino" beforeDir="false" afterPath="$PROJECT_DIR$/cpp/node.ino" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
