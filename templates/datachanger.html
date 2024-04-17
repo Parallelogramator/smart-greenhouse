@@ -174,9 +174,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(100%);
-  -ms-transform: translateX(100%);
-  transform: translateX(100%);
+  -webkit-transform: translateX(calc(90% + 5px));
+  -ms-transform: translateX(calc(90% + 5px));
+  transform: translateX(calc(90% + 5px));
 }
 
 /* Rounded sliders */
@@ -596,7 +596,6 @@ input:checked + .slider:before {
                         <input type="checkbox" id="on_HUMIDITY">
                         <span class="slider round"></span>
                     </label>
-
                     <label style="margin-left: 20px;">
                         Влажности почвы
                     </label>
@@ -630,7 +629,7 @@ input:checked + .slider:before {
    align-items: center;
    justify-content: center;">
                     <label style="margin-left: 20px;">
-                        Вентеляции
+                        Дополнительного освящения
                     </label>
                     <label class="switch">
                         <input type="checkbox" id="on_VENTILATION">
@@ -649,12 +648,14 @@ input:checked + .slider:before {
    align-items: center;
    justify-content: center;">
                     <label style="margin-left: 20px;">
-                        Дополнительного освящения
+                        Вентеляции
                     </label>
                     <label class="switch">
                         <input type="checkbox" id="on_LIGHT">
                         <span class="slider round"></span>
                     </label>
+
+                    <div style="margin-left: 5%; margin-right: 5%;"></div>
                     <label style="margin-left: 20px;">
                         Подогрева
                     </label>
